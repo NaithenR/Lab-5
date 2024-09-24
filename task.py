@@ -6,17 +6,19 @@ class Task:
         date (string): due date of task. MM/DD/YYYY
         time (string): time the task is due. HH/MM
     """
-    def __innit__(self,desc, date, time):
+    def __innit__(self, desc, date, time):
         self.desc = desc
         self.date = date
         self.time = time
     
     def get_description(self):
-        pass
+        return self.desc
     
     def __str__(self):
-        pass
+        return f"{self.desc} Due: {self.date} at {self.time}"
+
     def __repr__(self):
-        pass
+        return f"{self.desc},{self.date},{self.time}"
+
     def __lt__ (self, other):
         pass
