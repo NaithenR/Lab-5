@@ -11,9 +11,7 @@ def read_file():
     with open("tasklist.txt","r") as file:
         lines = file.readlines()
         for line in lines:
-            task_objects = line.strip().split(",")
-            if len(task_objects) == 3:
-                desc, date, time, = task_objects                
+                desc, date, time = line.strip().split(",")                
                 task = Task(desc, date, time)
                 task_list.append(task)
     return task_list
@@ -25,20 +23,23 @@ def write_file(tasklist):
 
 
 def get_date():
-    pass
+    month = int(input("Enter month:"))
+    day = int(input("Enter Day"))
+    year = int(input("Enter Year"))
+    if 1<= month <= 12 and 1 <= day<= 31 and 2000 <= year <=2100:
+         return f"{month:02d}/{day:02d}/{year}"
+    else:
+        print("Invalid input.")
 
 def get_time():
-    pass
+    hour = int(input("Enter Hour:"))
+    minute= int(input("Enter minute:"))
+    if 0 <= hour <= 23 and 0 <= minute <= 59:
+        return f"{hour:02d}:{minute:02d}"
+    else:
+        print("Invalid input.")
+
 
 def main():
-  
-    tasks = [
-        Task("Complete project", "09/30/2024", "10:00"),
-        Task("Attend meeting", "09/28/2024", "14:00")
-]
-    write_file(tasks)
-    loaded_tasks = read_file()
-    for task in loaded_tasks:
-        print(task)
+    pass
 
-main()

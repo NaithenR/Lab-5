@@ -1,12 +1,12 @@
-#attributes
-class Task:
+
+class Task:    
     """Represents task description, date and time
     Attributes:
         description (string): string description of task
         date (string): due date of task. MM/DD/YYYY
-        time (string): time the task is due. HH/MM
+        time (string): time the task is due. HH:MM
     """
-    def __innit__(self, desc, date, time):
+    def __init__(self, desc, date, time): 
         self.desc = desc
         self.date = date
         self.time = time
@@ -20,5 +20,5 @@ class Task:
     def __repr__(self):
         return f"{self.desc},{self.date},{self.time}"
 
-    def __lt__ (self, other):
+    def __lt__(self, other):
         pass
