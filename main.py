@@ -5,7 +5,7 @@
 import check_input
 from task import Task
 
-def main_menu():
+def main_menu(): # This function is used to display the main menu and return the user's choice.
     print("1. Display current task")
     print("2. Mark current task complete")
     print("3. Postpone current task")
@@ -20,6 +20,12 @@ def main_menu():
          print("Invalid choice")
 
 def read_file():
+    """
+    Reads tasks from a file and returns a list of Task objects.
+    
+    Returns:
+        list: A list of Task objects read from the file.
+    """
     task_list = []
     
     with open("tasklist.txt","r") as file:
@@ -31,12 +37,24 @@ def read_file():
     return task_list
 
 def write_file(tasklist):
+    """
+    Writes a list of Task objects to a file.
+    
+    Args:
+        tasklist (list): A list of Task objects to be written to the file.
+    """
     with open('tasklist.txt', 'w') as file:
         for task in tasklist:
             file.write(task.__repr__() + "\n")
 
 
 def get_date():
+    """
+    Prompts the user to enter a date and returns it in MM/DD/YYYY format.
+    
+    Returns:
+        str: The date entered by the user in MM/DD/YYYY format.
+    """
     month = check_input.get_int_range("Enter month: ", 1, 12)
     day = check_input.get_int_range("Enter Day: ", 1, 31)
     year = check_input.get_int_range("Enter Year: ", 2000, 2100)
@@ -44,6 +62,12 @@ def get_date():
     return f"{month:02d}/{day:02d}/{year}"
 
 def get_time():
+    """
+    Prompts the user to enter a time and returns it in HH:MM format.
+    
+    Returns:
+        str: The time entered by the user in HH:MM format.
+    """
     hour = check_input.get_int_range("Enter Hour: ", 0, 23)
     minute= check_input.get_int_range("Enter minute: ", 0 , 59)
     return f"{hour:02d}:{minute:02d}"
@@ -51,19 +75,21 @@ def get_time():
 
 
 def main():
-    tasklist = read_file()
-    tasklist.sort()
+    tasklist = read_file() # List of Task objects
+    tasklist.sort() # Sort tasks by due date and time
     while True:
         print("-Tasklist-")
         print(f"You have {len(tasklist)} tasks.")
         choice = main_menu()
 
+        # Display current task
         if choice == 1:
             if tasklist:
                 print(f"Current task is: {tasklist[0]}")
             else:
                 print("All task are complete.")
         
+        # Mark current task as complete
         elif choice == 2:
              if tasklist:
                 print(f"Marking current class as complete: {tasklist[0]}")
@@ -73,6 +99,7 @@ def main():
                 else:
                     print("All task are complete")
         
+        # Postpone current task
         elif choice == 3:
             if tasklist:
                 current_task = tasklist[0]
@@ -86,6 +113,7 @@ def main():
                 tasklist.append(updated_task)
                 tasklist.sort()
         
+        # Add new task
         elif choice == 4: 
             print("Enter new task description:")
             new_desc = input()
@@ -97,6 +125,7 @@ def main():
             tasklist.append(new_task)
             tasklist.sort()
         
+        # Save and quit
         elif choice == 5: 
             write_file(tasklist)
             print("Saving and exiting.")
