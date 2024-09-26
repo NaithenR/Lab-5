@@ -3,6 +3,7 @@
 from task import Task
 
 def main_menu():
+    print("-Tasklist-")
     print("1. Display current task")
     print("2. Mark current task complete")
     print("3. Postpone current task")
@@ -40,7 +41,7 @@ def get_date():
     if 1<= month <= 12 and 1 <= day<= 31 and 2000 <= year <=2100:
          return f"{month:02d}/{day:02d}/{year}"
     else:
-        print("Invalid input.")
+        print("Invalid date.")
 
 def get_time():
     hour = int(input("Enter Hour:"))
@@ -48,9 +49,39 @@ def get_time():
     if 0 <= hour <= 23 and 0 <= minute <= 59:
         return f"{hour:02d}:{minute:02d}"
     else:
-        print("Invalid input.")
+        print("Invalid time.")
 
 
 def main():
-    pass
+    tasklist = read_file
+    while True:
+        print(f"You have {len(tasklist)} tasks.")
+        choice = main_menu()
 
+        if choice == 1:
+            if tasklist:
+                print(f"Current task is: {tasklist[0]}")
+            else:
+                print("All task are complete.")
+        
+        elif choice == 2:
+             if tasklist:
+                print(f"Marking current class as complete: {tasklist[0]}")
+                tasklist.pop(0)
+                if tasklist:
+                    print(f"New current task is: {tasklist[0]}")
+                else:
+                    print("All task are complete")
+        
+        elif choice == 3:
+            if tasklist:
+                current_task = tasklist[0]
+                print(f"Postponing task: {current_task}")
+                print("Enter new date:")
+                new_date = get_date()
+                print("Enter new time:")
+                new_time = get_time()
+                updated_task = Task(current_task.desc, new_date, new_time)
+                tasklist.pop(0)
+                tasklist.append(updated_task)
+                #Call sort
