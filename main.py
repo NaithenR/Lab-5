@@ -3,7 +3,18 @@
 from task import Task
 
 def main_menu():
-    pass
+    print("1. Display current task")
+    print("2. Mark current task complete")
+    print("3. Postpone current task")
+    print("4. Add new task")
+    print("5. Save and quit")
+
+    choice = int(input("Enter choice:"))
+
+    if choice in range(1,6):
+         return choice
+    else:
+         print("Invalid choice")
 
 def read_file():
     task_list = []
